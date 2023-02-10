@@ -65,6 +65,11 @@
     {{- else }}
     #         (none)
     {{- end }}
+    {{- $fixedUpstream := (coalesce $.container.Env.FIXED_UPSTREAM "") }}
+    {{- if not (eq $fixedUpstream "") }}
+#     FIXED_UPSTREAM: {{ $fixedUpstream }}
+        {{- $ip = $fixedUpstream }}
+    {{- end }}
     #     IP address: {{ if $ip }}{{ $ip }}{{ else }}(none usable){{ end }}
     {{- $_ := set $ "ip" $ip }}
 {{- end }}
